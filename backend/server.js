@@ -3,6 +3,9 @@ import path from "path";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import productRouter from "./routes/productRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+
 import cors from 'cors';
 
 dotenv.config();
@@ -21,7 +24,8 @@ const app = express();
 app.use(express.json());
 
 
-
+app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 
 
 const __dirname = path.resolve();
