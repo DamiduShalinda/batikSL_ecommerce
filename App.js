@@ -1,6 +1,7 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import HomeScreen from "./screens/HomeScreen";
 import Container from "react-bootstrap/Container";
 import DashboardScreen from "./screens/DashboardScreen";
 
@@ -30,6 +31,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+              <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
