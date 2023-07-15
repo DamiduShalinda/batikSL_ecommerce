@@ -10,6 +10,14 @@ function App() {
         <Container className="mt-3">
           <Routes>
             <Route path="/search" element={<SearchScreen />} />
+            <Route
+              path="/admin/product/:id"
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
           </Routes>
         </Container>
       </main>
