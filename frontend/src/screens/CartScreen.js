@@ -17,7 +17,24 @@ export default function CartScreen() {
     cart: { cartItems },
   } = state;
 
-  
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+  };
+  const removeItemHandler = (item) => {
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
+
+  const checkoutHandler = () => {
+    navigate('/signin?redirect=/shipping');
+  };
 
   return (
     <div>
@@ -42,7 +59,7 @@ export default function CartScreen() {
                         alt={item.name}
                         className="img-fluid rounded img-thumbnail"
                       ></img>{' '}
-                     
+                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
                       <Button
