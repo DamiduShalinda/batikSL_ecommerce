@@ -10,7 +10,8 @@ function App() {
         <main>
           <Container className="mt-3">
             <Routes>
-           
+            <Route path="/cart" element={<CartScreen />} />
+            <Route path="/payment" element={<PaymentMethodScreen />}></Route>
             </Routes>
           </Container>
         </main>
