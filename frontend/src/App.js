@@ -12,6 +12,7 @@ function App() {
             <Routes>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
             </Routes>
           </Container>
         </main>
