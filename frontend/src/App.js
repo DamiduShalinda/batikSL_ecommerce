@@ -2,6 +2,9 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import MapScreen from "./screens/MapScreen";
+import OrderListScreen from "./screens/OrderListScreen";
+
+
 
 function App() {
  
@@ -18,8 +21,19 @@ function App() {
                     <MapScreen />
                   </ProtectedRoute>
                 }
-              />
+/>
+
 }
+
+<Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+       
             </Routes>
           </Container>
         </main>
