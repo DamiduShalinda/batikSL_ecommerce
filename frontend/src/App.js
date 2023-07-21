@@ -3,6 +3,9 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import SignupScreen from "./screens/SignupScreen";
 import SigninScreen from "./screens/SigninScreen";
+import UserListScreen from "./screens/UserListScreen";
+
+
 
 function App() {
  
@@ -15,6 +18,15 @@ function App() {
              {/* add here */}
              <Route path="/signup" element={<SignupScreen />} />
              <Route path="/signin" element={<SigninScreen />} />
+             <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+
             </Routes>
           </Container>
         </main>
