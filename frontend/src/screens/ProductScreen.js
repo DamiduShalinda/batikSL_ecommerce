@@ -1,16 +1,20 @@
 import axios from "axios";
-import { useEffect, useReducer, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
+import { Store } from "../Store";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,12 +40,14 @@ const reducer = (state, action) => {
 function ProductScreen() {
   let reviewsRef = useRef();
 
+  const [comment, setComment] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
 
-  const [{ loading, error, product }, dispatch] =
+  const [{ loading, error, product, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
       product: [],
       loading: true,
@@ -60,7 +66,55 @@ function ProductScreen() {
     fetchData();
   }, [slug]);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
 
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity },
+    });
+    navigate("/cart");
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (!comment) {
+      toast.error("Please enter comment ");
+      return;
+    }
+    try {
+      const { data } = await axios.post(
+        `/api/products/${product._id}/reviews`,
+        { comment, name: userInfo.name },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({
+        type: "CREATE_SUCCESS",
+      });
+      toast.success("Review submitted successfully");
+      product.reviews.unshift(data.review);
+      product.numReviews = data.numReviews;
+      dispatch({ type: "REFRESH_PRODUCT", payload: product });
+      window.scrollTo({
+        behavior: "smooth",
+        top: reviewsRef.current.offsetTop,
+      });
+    } catch (error) {
+      toast.error(getError(error));
+      dispatch({ type: "CREATE_FAIL" });
+    }
+  };
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -131,7 +185,15 @@ function ProductScreen() {
                   </Row>
                 </ListGroup.Item>
 
-                
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <div className="d-grid">
+                      <Button onClick={addToCartHandler} variant="primary">
+                        Add to Cart
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                )}
               </ListGroup>
             </Card.Body>
           </Card>
@@ -154,7 +216,40 @@ function ProductScreen() {
             </ListGroup.Item>
           ))}
         </ListGroup>
-        
+        <div className="my-3">
+          {userInfo ? (
+            <form onSubmit={submitHandler}>
+              <h2>Write a customer review</h2>
+              <FloatingLabel
+                controlId="floatingTextarea"
+                label="Comments"
+                className="mb-3"
+              >
+                <Form.Control
+                  as="textarea"
+                  placeholder="Leave a comment here"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </FloatingLabel>
+
+              <div className="mb-3">
+                <Button disabled={loadingCreateReview} type="submit">
+                  Submit
+                </Button>
+                {loadingCreateReview && <LoadingBox></LoadingBox>}
+              </div>
+            </form>
+          ) : (
+            <MessageBox>
+              Please{" "}
+              <Link to={`/signin?redirect=/product/${product.slug}`}>
+                Sign In
+              </Link>{" "}
+              to write a review
+            </MessageBox>
+          )}
+        </div>
       </div>
     </div>
   );
