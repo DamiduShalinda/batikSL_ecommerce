@@ -26,7 +26,32 @@ export default function ShippingAddressScreen() {
     }
   }, [userInfo, navigate]);
   const [country, setCountry] = useState(shippingAddress.country || '');
-  
+  const submitHandler = (e) => {
+    e.preventDefault();
+    ctxDispatch({
+      type: 'SAVE_SHIPPING_ADDRESS',
+      payload: {
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        location: shippingAddress.location,
+      },
+    });
+    localStorage.setItem(
+      'shippingAddress',
+      JSON.stringify({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        location: shippingAddress.location,
+      })
+    );
+    navigate('/payment');
+  };
 
   useEffect(() => {
     ctxDispatch({ type: 'SET_FULLBOX_OFF' });
