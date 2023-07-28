@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import MapScreen from "./screens/MapScreen";
 import OrderListScreen from "./screens/OrderListScreen";
-
+import OrderScreen from "./screens/OrderScreen";
 
 
 function App() {
@@ -33,7 +33,16 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-       
+
+<Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
+
             </Routes>
           </Container>
         </main>
