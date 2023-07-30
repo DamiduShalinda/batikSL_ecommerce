@@ -19,6 +19,14 @@ function App() {
               }
             ></Route>
             <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
           </Routes>
         </Container>
       </main>
