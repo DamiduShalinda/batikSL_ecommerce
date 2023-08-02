@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignupScreen from "./screens/SignupScreen";
 import SigninScreen from "./screens/SigninScreen";
 import UserListScreen from "./screens/UserListScreen";
-
+import UserEditScreen from "./screens/UserEditScreen";
 
 
 function App() {
@@ -26,6 +26,15 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+              <Route
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+
 
             </Routes>
           </Container>
