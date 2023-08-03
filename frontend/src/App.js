@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import MapScreen from "./screens/MapScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import OrderScreen from "./screens/OrderScreen";
-
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 
 function App() {
  
@@ -42,7 +42,14 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-
+<Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
             </Routes>
           </Container>
         </main>
