@@ -56,8 +56,25 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-
-<Route
+            <Route path="/search" element={<SearchScreen />} />
+            <Route
+              path="/admin/product/:id"
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
                 path="/order/:id"
                 element={
                   <ProtectedRoute>
@@ -65,7 +82,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-<Route
+              <Route
                 path="/orderhistory"
                 element={
                   <ProtectedRoute>
@@ -84,8 +101,8 @@ function App() {
         </footer>
       </div>
     </BrowserRouter>
+
   );
 }
 
 export default App;
-
