@@ -1,10 +1,15 @@
 
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import SignupScreen from "./screens/SignupScreen";
+import SigninScreen from "./screens/SigninScreen";
+import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 import MapScreen from "./screens/MapScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+
 
 
 function App() {
@@ -22,11 +27,28 @@ function App() {
                     <MapScreen />
                   </ProtectedRoute>
                 }
-/>
+                />
 
-}
-
-<Route
+                }
+               <Route path="/signup" element={<SignupScreen />} />
+             <Route path="/signin" element={<SigninScreen />} />
+             <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+               <Route
                 path="/admin/orders"
                 element={
                   <AdminRoute>
@@ -66,5 +88,4 @@ function App() {
 }
 
 export default App;
-
 
