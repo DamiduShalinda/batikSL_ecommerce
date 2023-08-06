@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import './css/SigninScreen.css';
+
 
 export default function SignupScreen() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className="small-container1">
+    <Container className="small-container">
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
@@ -85,16 +85,13 @@ export default function SignupScreen() {
             />
           </Form.Group>
         </Form.Group>
-        <center>
         <div className="mb-3">
-          <Button type="submit" style={{ width: '200px' }}>Sign Up</Button>
+          <Button type="submit">Sign Up</Button>
         </div>
-
         <div className="mb-3">
           Already have an account?{' '}
           <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
-        </center>
       </Form>
     </Container>
   );

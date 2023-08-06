@@ -29,6 +29,7 @@
 .btn-outline-primary {
   background-color: #A78295;
   color: #fafafa;
+  width: 80%;
   border-color: #A78295;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {

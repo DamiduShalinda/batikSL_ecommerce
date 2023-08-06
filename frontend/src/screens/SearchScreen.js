@@ -35,16 +35,20 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: "Rs.1 to Rs.50",
-    value: "1-50",
+    name: "Rs.500 to Rs.1000",
+    value: "500-1000",
   },
   {
-    name: "Rs.51 to Rs.200",
-    value: "51-200",
+    name: "Rs.1000 to Rs.1500",
+    value: "1000-1500",
   },
   {
-    name: "Rs.201 to 1000",
-    value: "201-1000",
+    name: "Rs.1500 to 2000",
+    value: "1500-2000",
+  },
+  {
+    name: "Above Rs 2000",
+    value: "2000-3000",
   },
 ];
 

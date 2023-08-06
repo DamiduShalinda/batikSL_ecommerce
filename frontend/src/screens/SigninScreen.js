@@ -68,7 +68,7 @@ export default function SigninScreen() {
         </Form.Group>
         <center>
         <div className="mb-3">
-          <Button type="submit" class="btn1" style={{ width: '200px' }}>Sign In</Button>
+          <Button type="submit" class="btn1">Sign In</Button>
         </div>
         </center>
         <div className="mb-3">
