@@ -1,0 +1,37 @@
+/* .mainloginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    height: 100vh;
+    background-image: url('img2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.8); 
+  } */
+.small-container1 {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 40%;
+    height: 80vh;
+    background-color: rgb(235, 230, 232);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+  
+  }
+
+  .btn-primary,
+.btn-outline-primary {
+  background-color: #A78295;
+  color: #fafafa;
+  border-color: #A78295;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  background-color:#664e5a;
+  border-color: #664e5a;
+}

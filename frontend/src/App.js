@@ -78,26 +78,26 @@ function App() {
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar
-            style={{ backgroundColor: "#331D2C" }}
+            style={{ backgroundColor: "#613245" }}
             className="navbar-custom "
             expand="lg"
           >
             <Container>
               <Button
-                style={{ backgroundColor: "#331D2C", marginRight: "10px" }}
+                style={{ backgroundColor: "#613245", marginRight: "10px" ,width:'90px'}}
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
                 <i className="fas fa-bars"></i>
               </Button>
 
-              <LinkContainer to="/">
-                <Navbar.Brand>Batik SL</Navbar.Brand>
+              <LinkContainer to="/" style={{color:'white'}}>
+                <Navbar.Brand style={{color:'white'}}>Batik SL</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/cart" className="nav-link">
+                  <Link to="/cart" className="nav-link" style={{color:'white'}}>
                     Cart
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
@@ -106,8 +106,8 @@ function App() {
                     )}
                   </Link>
                   {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                      <LinkContainer to="/profile">
+                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown" style={{color:'white'}}>
+                      <LinkContainer to="/profile" >
                         <NavDropdown.Item>User Profile</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/orderhistory">
