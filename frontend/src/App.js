@@ -6,6 +6,7 @@ import OrderListScreen from "./screens/OrderListScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 
+
 function App() {
  
   return (
@@ -14,7 +15,7 @@ function App() {
         <main>
           <Container className="mt-3">
             <Routes>
-             {<Route
+                         {<Route
                 path="/map"
                 element={
                   <ProtectedRoute>
@@ -50,6 +51,9 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+            <Route path="/cart" element={<CartScreen />} />
+            <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
             </Routes>
           </Container>
         </main>
@@ -62,3 +66,5 @@ function App() {
 }
 
 export default App;
+
+
